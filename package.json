@@ -15,6 +15,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:coverage": "react-scripts test -- --coverage",
     "prettier": "prettier --ignore-path .prettierignore \"**/*.+(js|json|css|md|mdx|html)\"",
     "format": "npm run prettier --  --write ",
     "format:check": "npm run prettier -- --check",
