@@ -15,6 +15,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "prettier": "prettier --ignore-path .prettierignore \"**/*.+(js|json|css|md|mdx|html)\"",
+    "format": "npm run prettier --  --write ",
+    "format:check": "npm run prettier -- --check",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -34,5 +37,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.2.0"
   }
 }
