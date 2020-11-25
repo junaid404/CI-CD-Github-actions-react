@@ -1,2 +1,2 @@
 * @junaid404
-*.+(js|jsx|yml|css|json|svg) @junaid-pak
+*.(js|jsx|yml|css|json|svg) @junaid-pak

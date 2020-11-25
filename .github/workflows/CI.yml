@@ -10,33 +10,54 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      CI: true
+
     steps:
-      - name: ⬇️ Checkout repo
+      - name: 🌀 Checkout repo
         uses: actions/checkout@v2
 
-      - name: ⎔ Setup node v14.15.1
+      - name: 🔧 Setup node v14.15.1
         uses: actions/setup-node@v1
         with:
           node-version: '14.15.1'
 
+      - name: 🔃 Cache or restore deps
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-key: |
+            ${{ runner.os }}-node-modules-
+
       - name: 📥 Download deps
         run: npm ci
 
-      - name: ▶️ Run validate script
+      - name: ⚙ Run validate script
         run: npm run format:check
 
-      - name: ⚛️ Test & gen coverage report
-        uses: codecov/codecov-action@v1
+      - name: 🔎 Test & gen code coverage
+        run: npm run test:coverage
 
-        env:
-          CI: true
+      - name: 📤 Upload code coverage to artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: test-coverage-report
+          path: coverage
 
-      - name: Build project
-        if: ${{github.event_name == 'push'}}
+      - name: 🏗 Build project
+        if: ${{ github.event_name == 'push' }}
         run: npm run build
 
-      - name: Deploy to Staging
-        if: ${{github.event_name == 'push'}}
+      - name: 📤 Upload build folder to artifacts
+        if: ${{ github.event_name == 'push' }}
+        uses: actions/upload-artifact@v1
+        with:
+          name: build
+          path: build
+
+      - name: 🚀 Deploy to Staging
+        if: ${{ github.event_name == 'push' }}
         run: npx surge --project ./build --domain ci-react.surge.sh
 
         env:
