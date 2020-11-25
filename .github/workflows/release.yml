@@ -1,0 +1,22 @@
+name: Notify on new Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✉️ Send a message on Discord Server
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          username: ${{ github.event.release.author.login }}
+          color: '#4BB543'
+          avatarUrl: ${{ github.event.release.author.avatar_url }}
+          description: ${{ github.event.release.author.html_url }}
+          details: ${{ github.event.release.body }}
+          footer: '@junaid404'
+          text: Release ${{ github.event.release.tag_name }} is Published.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
