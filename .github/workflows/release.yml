@@ -15,7 +15,7 @@ jobs:
           username: ${{ github.event.release.author.login }}
           color: '#4BB543'
           avatarUrl: ${{ github.event.release.author.avatar_url }}
-          description: ${{ github.event.release.author.html_url }}
+          description: ${{ github.event.release.html_url }}
           details: ${{ github.event.release.body }}
           footer: '@junaid404'
           text: Release ${{ github.event.release.tag_name }} is Published.
