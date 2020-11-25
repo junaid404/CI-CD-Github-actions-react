@@ -27,7 +27,7 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-key: |
+          restore-keys: |
             ${{ runner.os }}-node-modules-
 
       - name: 📥 Download deps
