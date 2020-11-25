@@ -40,6 +40,18 @@
     ]
   },
   "devDependencies": {
-    "prettier": "^2.2.0"
+    "prettier": "^2.2.0",
+    "semantic-release": "^17.3.0"
+  },
+  "release": {
+    "branches": [
+      "master"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/github"
+    ],
+    "repositoryUrl": "https://github.com/junaid404/CI-CD-Github-actions-react"
   }
 }
