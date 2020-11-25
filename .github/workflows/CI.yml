@@ -45,6 +45,12 @@ jobs:
           name: test-coverage-report
           path: coverage
 
+      - name: 📤 Upload code coverage to Codecov
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        run: npx codecov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
       - name: 🏗 Build project
         if: ${{ github.event_name == 'push' }}
         run: npm run build
